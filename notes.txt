@@ -1,0 +1,2 @@
+git clone -b i-structure https://github.com/himangipatel/MVVM-Kotlin.git
+
