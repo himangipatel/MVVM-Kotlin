@@ -1,15 +1,11 @@
-package com.structure.kotlin.ui.login
+package com.structure.kotlin.ui
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import android.content.Context
 import com.structure.kotlin.R
 import com.structure.kotlin.apiutills.ApiUtility
 import com.structure.kotlin.base.BaseViewModel
-import com.structure.kotlin.db.DatabaseHandler
 import com.structure.kotlin.model.LoginUserData
-import com.structure.kotlin.model.Post
-import com.structure.kotlin.model.User
 import com.structure.kotlin.network.RestApi
 import com.structure.kotlin.validator.ValidationErrorModel
 import com.structure.kotlin.validator.Validator

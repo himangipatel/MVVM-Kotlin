@@ -2,10 +2,7 @@ package com.structure.kotlin.injection.component
 
 import com.structure.kotlin.injection.module.ContextModule
 import com.structure.kotlin.injection.module.NetworkModule
-import com.structure.kotlin.ui.login.LoginViewModel
-import com.structure.kotlin.ui.paging.PagingLibViewModel
-
-import com.structure.kotlin.ui.post.PostViewModel
+import com.structure.kotlin.ui.LoginViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -18,9 +15,8 @@ import javax.inject.Singleton
 @Component(modules = arrayOf((ContextModule::class), (NetworkModule::class)))
 interface VMInjector {
 
-    fun inject(postViewModel: PostViewModel)
     fun inject(loginViewModel: LoginViewModel)
-    fun inject(pagingLibViewModel: PagingLibViewModel)
+
 
     @Component.Builder
     interface Builder {

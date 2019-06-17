@@ -9,10 +9,8 @@ import com.structure.kotlin.injection.component.DaggerVMInjector
 import com.structure.kotlin.injection.component.VMInjector
 import com.structure.kotlin.injection.module.ContextModule
 import com.structure.kotlin.injection.module.NetworkModule
-import com.structure.kotlin.ui.login.LoginViewModel
-import com.structure.kotlin.ui.paging.PagingLibViewModel
+import com.structure.kotlin.ui.LoginViewModel
 
-import com.structure.kotlin.ui.post.PostViewModel
 import com.structure.kotlin.utills.Utility
 
 
@@ -73,8 +71,6 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     private fun inject() {
         when (this) {
             is LoginViewModel -> injector.inject(this)
-            is PostViewModel -> injector.inject(this)
-            is PagingLibViewModel -> injector.inject(this)
         }
     }
 

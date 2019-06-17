@@ -1,4 +1,4 @@
-package com.structure.kotlin.ui.login
+package com.structure.kotlin.ui
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,13 +11,8 @@ import com.structure.kotlin.base.MVVMActivity
 import com.structure.kotlin.databinding.ActivityLoginBinding
 import com.structure.kotlin.db.DatabaseHandler
 
-import com.structure.kotlin.model.LoginUserData
 import com.structure.kotlin.model.User
-import com.structure.kotlin.ui.paging.PagingDemoActivity
 
-import com.structure.kotlin.ui.post.PostActivity
-import com.structure.kotlin.ui.userlisting.UserListingActivity
-import com.structure.kotlin.utills.Utility
 import com.structure.kotlin.validator.ValidationError
 import com.structure.kotlin.validator.ValidationErrorModel
 import io.reactivex.Observable
@@ -34,9 +29,6 @@ import java.util.*
 @Layout(R.layout.activity_login)
 class LoginActivity : MVVMActivity<LoginViewModel>() {
 
-//    @Inject
-//    internal lateinit var downloader: ImageDownloader
-
     override fun createViewModel(): LoginViewModel {
         return ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
@@ -49,17 +41,10 @@ class LoginActivity : MVVMActivity<LoginViewModel>() {
         activityLoginBinding = getBindingClass()
         setTitleTextView("Login")
         showHideBack(View.VISIBLE)
-//        addDummyUsersData()
         viewModel.validateErrModel.observe(this, validationErrorModelObserver)
         viewModel.userData.observe(this, Observer {
-            val intent = Intent(this@LoginActivity, PostActivity::class.java)
-            startActivity(intent)
-        })
 
-//        downloader.toImageView(
-//            main_image,
-//            "http://www.quickmeme.com/img/a6/a69d84379a04cc6f56a58c1c9b8d0826ddd24c9e52644ac7a068705a7be1a6bb.jpg"
-//        )
+        })
 
     }
 
@@ -71,6 +56,7 @@ class LoginActivity : MVVMActivity<LoginViewModel>() {
         userList.add(User("User 2", "xyz2@gmail.com"))
         userList.add(User("User 3", "xyz3@gmail.com"))
         userList.add(User("User 4", "xyz4@gmail.com"))
+
         Observable.fromCallable({
             db = DatabaseHandler.getDatabase(context = this)
             db!!.clearAllTables()
@@ -88,16 +74,10 @@ class LoginActivity : MVVMActivity<LoginViewModel>() {
         super.onClick(v)
         when (v.id) {
             R.id.btnSignIn -> {
-//                val loginUserData = LoginUserData()
-//                loginUserData.userEmail = Utility.getText(email)
-//                loginUserData.password = Utility.getText(password)
-//                viewModel.isValidEmailPassWord(loginUserData)
-                val intent = Intent(this@LoginActivity, UserListingActivity::class.java)
-                startActivity(intent)
+
             }
             R.id.ivRight -> {
-                val intent = Intent(this@LoginActivity, PagingDemoActivity::class.java)
-                startActivity(intent)
+
             }
         }
     }

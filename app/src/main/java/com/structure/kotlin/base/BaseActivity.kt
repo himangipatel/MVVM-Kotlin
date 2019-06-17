@@ -1,25 +1,17 @@
 package com.structure.kotlin.base
 
 import android.app.Dialog
-import android.content.Intent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import android.os.Bundle
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
-import com.imagepicker.FilePickUtils
-import com.imagepicker.FilePickUtils.CAMERA_PERMISSION
-import com.imagepicker.FilePickUtils.STORAGE_PERMISSION_IMAGE
-import com.imagepicker.LifeCycleCallBackManager
-import com.structure.kotlin.custom.BottomDialog
 import com.structure.kotlin.R
 import com.structure.kotlin.annotation.Layout
 import com.structure.kotlin.databinding.ActivityBaseBinding
-import com.structure.kotlin.databinding.DialogPhotoSelectorBinding
 import com.structure.kotlin.utills.Utility
 
 
@@ -29,9 +21,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     private var progressDialog: Dialog? = null
     val layout: Layout? get() = javaClass.getAnnotation(Layout::class.java)
 
-    private var filePickUtils: FilePickUtils? = null
-    private var bottomSheetDialog: BottomDialog? = null
-    private var lifeCycleCallBackManager: LifeCycleCallBackManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,42 +143,4 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         Utility.logoutUser(this)
     }
 
-    fun showImagePickerDialog(onFileChoose: FilePickUtils.OnFileChoose) {
-        filePickUtils = FilePickUtils(this, onFileChoose)
-        lifeCycleCallBackManager = filePickUtils!!.getCallBackManager()
-
-        val binding = DataBindingUtil.inflate<DialogPhotoSelectorBinding>(layoutInflater,
-            R.layout.dialog_photo_selector,null,false)
-
-        bottomSheetDialog = BottomDialog(this@BaseActivity)
-        bottomSheetDialog!!.setContentView(binding.root)
-
-        binding.tvCamera.setOnClickListener(onCameraListener)
-        binding.tvGallery.setOnClickListener(onGalleryListener)
-        bottomSheetDialog!!.show()
-    }
-
-    fun dismissImagePickerDialog() {
-        bottomSheetDialog!!.dismiss()
-    }
-
-    private val onCameraListener =
-        View.OnClickListener { filePickUtils!!.requestImageCamera(CAMERA_PERMISSION, false, true) }
-
-    private val onGalleryListener =
-        View.OnClickListener { filePickUtils!!.requestImageGallery(STORAGE_PERMISSION_IMAGE, false, true) }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (lifeCycleCallBackManager != null) {
-            lifeCycleCallBackManager!!.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (lifeCycleCallBackManager != null) {
-            lifeCycleCallBackManager!!.onActivityResult(requestCode, resultCode, data)
-        }
-    }
 }
