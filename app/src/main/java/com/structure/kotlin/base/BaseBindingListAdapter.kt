@@ -1,13 +1,11 @@
-package com.structure.kotlin.base.adapter
+package com.structure.kotlin.base
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.structure.kotlin.listener.ItemClickListener
 
 /**
  * Created by Himangi on 11/1/19
@@ -35,3 +33,18 @@ abstract class BaseBindingListAdapter<I> protected constructor(diffCallback: Dif
     class BaseBindingViewHolder(var binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
+
+
+//class CheckInAdapter(val listener: ItemClickListener<UserRegistrationData>) :
+//    BaseBindingListAdapter<UserRegistrationData>(diffCallback = UserRegistrationData.callback) {
+//
+//
+//    override fun bind(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): ViewDataBinding {
+//        return ItemCheckinBinding.inflate(inflater, parent, false)
+//    }
+//
+//    override fun onBindViewHolder(holder: BaseBindingViewHolder, position: Int) {
+//
+//    }
+//
+//}

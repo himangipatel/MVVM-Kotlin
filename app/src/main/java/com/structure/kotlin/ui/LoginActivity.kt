@@ -2,11 +2,10 @@ package com.structure.kotlin.ui
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.structure.kotlin.R
-import com.structure.kotlin.annotation.Layout
+import com.structure.kotlin.utills.Layout
 import com.structure.kotlin.base.MVVMActivity
 import com.structure.kotlin.databinding.ActivityLoginBinding
 import com.structure.kotlin.db.DatabaseHandler
@@ -45,7 +44,6 @@ class LoginActivity : MVVMActivity<LoginViewModel>() {
         viewModel.userData.observe(this, Observer {
 
         })
-
     }
 
     private fun addDummyUsersData() {
@@ -57,14 +55,14 @@ class LoginActivity : MVVMActivity<LoginViewModel>() {
         userList.add(User("User 3", "xyz3@gmail.com"))
         userList.add(User("User 4", "xyz4@gmail.com"))
 
-        Observable.fromCallable({
+        Observable.fromCallable {
             db = DatabaseHandler.getDatabase(context = this)
             db!!.clearAllTables()
             val userDao = db?.userDao()
             with(userDao) {
                 this?.insert(userList)
             }
-        }).subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
 

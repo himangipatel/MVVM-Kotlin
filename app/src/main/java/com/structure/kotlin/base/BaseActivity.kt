@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import com.structure.kotlin.R
-import com.structure.kotlin.annotation.Layout
+import com.structure.kotlin.utills.Layout
 import com.structure.kotlin.databinding.ActivityBaseBinding
 import com.structure.kotlin.utills.Utility
 
@@ -30,10 +30,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    /**
-     * A method which gets activity's layout and adds it to the container of base view having toolbar
-     * It is compulsory to call this method in an activity which has toolbar
-     */
     protected fun <T : ViewDataBinding> getBindingClass(): T {
         return DataBindingUtil.inflate(layoutInflater, layout!!.value, binding.layoutContainer, true)
     }
@@ -56,16 +52,10 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         binding.ivLeft.visibility = visibility
     }
 
-    /**
-     * A method to set title of toolbar
-     */
     fun setTitleTextView(title: String) {
         binding.tvTitle.text = title
     }
 
-    /**
-     * A method to show and set icon on right image view of toolbar
-     */
     fun setRightImageView(drawable: Int) {
         binding.ivRight.visibility = View.VISIBLE
         binding.ivRight.setImageDrawable(ContextCompat.getDrawable(this, drawable))
@@ -91,9 +81,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         else hideLoading()
     }
 
-    /**
-     * A method to show progress dialog on center of screen during api calls
-     */
     fun showLoading() {
         if (progressDialog == null) {
             progressDialog = Dialog(this, R.style.CustomDialog)
@@ -109,9 +96,6 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         progressDialog?.show()
     }
 
-    /**
-     * A method to hide the progress dialog
-     */
     fun hideLoading() {
         if (progressDialog != null) {
             progressDialog?.dismiss()
@@ -119,17 +103,10 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
-    /**
-     * A method to show horizontal progress bar on toolbar during api calls
-     */
     fun showToolbarLoading() {
         binding.progressView.visibility = View.VISIBLE
     }
 
-    /**
-     * A method to hide the  horizontal progress bar
-     */
     fun hideToolbarLoading() {
         binding.progressView.visibility = View.GONE
     }

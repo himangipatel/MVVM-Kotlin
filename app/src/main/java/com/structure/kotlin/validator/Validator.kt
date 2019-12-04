@@ -28,22 +28,8 @@ object Validator {
     fun validateEmail(email: String?): ValidationErrorModel? {
         return if (isBlank(email))
             ValidationErrorModel(R.string.blank_email, ValidationError.EMAIL)
-//        else if (!Pattern.compile(EMAIL_PATTERN).matcher(email).matches())
-//            ValidationErrorModel(R.string.invalid_email, ValidationError.EMAIL)
-        else
-            null
-    }
-
-    fun validateFirstName(fname: String?): ValidationErrorModel? {
-        return if (isBlank(fname))
-            ValidationErrorModel(R.string.blank_first_name, ValidationError.FIRST_NAME)
-        else
-            null
-    }
-
-    fun validateLastName(lname: String?): ValidationErrorModel? {
-        return if (isBlank(lname))
-            ValidationErrorModel(R.string.blank_last_name, ValidationError.LAST_NAME)
+        else if (!Pattern.compile(EMAIL_PATTERN).matcher(email).matches())
+            ValidationErrorModel(R.string.invalid_email, ValidationError.EMAIL)
         else
             null
     }
@@ -58,20 +44,8 @@ object Validator {
         }
     }
 
-    fun validateConfirmPassword(password: String?, confirmPassword: String?): ValidationErrorModel? {
-        return when {
-            isBlank(confirmPassword) -> ValidationErrorModel(R.string.blank_confirm_password, ValidationError.CONFIRM_PASSWORD)
-            password != confirmPassword -> ValidationErrorModel(R.string.invalid_confirm_password, ValidationError.CONFIRM_PASSWORD)
-            else -> null
-        }
-    }
-
     private fun isBlank(text: String?): Boolean {
         return text == null || text.trim().isEmpty()
-    }
-
-    fun validateData(data: String): ValidationErrorModel? {
-        return if (isBlank(data)) ValidationErrorModel(R.string.blank_data, ValidationError.DATA) else null
     }
 
     fun validateTelephone(phone: String): ValidationErrorModel? {
@@ -80,37 +54,5 @@ object Validator {
             phone.length !in 6..15 -> ValidationErrorModel(R.string.invalid_phone, ValidationError.PHONE)
             else -> null
         }
-    }
-
-    fun validateUserName(userName: String?): ValidationErrorModel? {
-        return if (isBlank(userName))
-            ValidationErrorModel(R.string.blank_username, ValidationError.USERNAME)
-        /*else if (!Pattern.compile(EMAIL_PATTERN).matcher(userName).matches())
-            ValidationErrorModel(R.string.invalid_email, ValidationError.USERNAME)*/
-        else
-            null
-    }
-
-    fun isBlank(editText: EditText): Boolean {
-        return editText.text == null || editText.text.trim().isEmpty()
-    }
-
-    fun validateData(context: Context, str: String, strKey: String): String {
-        return if (isBlank(str)) {
-            context.resources.getString(R.string.invalid) + strKey
-        } else ""
-    }
-
-    fun validateNumber(strNumber: String, min: Int, max: Int): Boolean {
-        return strNumber.length in min..max
-    }
-
-    fun validateAllFields(data: ArrayList<String>): ValidationErrorModel? {
-        for (str in data) {
-            if (isBlank(str)) {
-                return@validateAllFields ValidationErrorModel(R.string.msg_all_field_required, ValidationError.DATA)
-            }
-        }
-        return null
     }
 }

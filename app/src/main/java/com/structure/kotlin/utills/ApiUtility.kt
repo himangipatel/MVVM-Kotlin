@@ -1,6 +1,4 @@
-package com.structure.kotlin.apiutills
-
-import com.structure.kotlin.utills.Constants
+package com.structure.kotlin.utills
 
 object ApiUtility {
 

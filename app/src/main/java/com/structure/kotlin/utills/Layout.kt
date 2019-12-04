@@ -1,4 +1,4 @@
-package com.structure.kotlin.annotation
+package com.structure.kotlin.utills
 
 import androidx.annotation.LayoutRes
 

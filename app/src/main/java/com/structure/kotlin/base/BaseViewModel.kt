@@ -6,22 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import android.content.Context
 import androidx.annotation.StringRes
 import com.structure.kotlin.injection.component.DaggerVMInjector
-import com.structure.kotlin.injection.component.VMInjector
-import com.structure.kotlin.injection.module.ContextModule
-import com.structure.kotlin.injection.module.NetworkModule
+import com.structure.kotlin.injection.VMInjector
+import com.structure.kotlin.injection.ContextModule
+import com.structure.kotlin.injection.NetworkModule
 import com.structure.kotlin.ui.LoginViewModel
 
 import com.structure.kotlin.utills.Utility
 
-
-/**
- * Base viewModel any viewModel of the application must extend. It provides initial injections and
- * required methods.
- * @param V the type of the View the viewModel is based on
- * @property view the view the viewModel is based on
- * @property injector The injector used to inject required dependencies
- * @constructor Injects the required dependencies
- */
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
     val isLoading = MutableLiveData<Boolean>()

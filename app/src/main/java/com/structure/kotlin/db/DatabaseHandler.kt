@@ -18,26 +18,6 @@ abstract class DatabaseHandler : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     companion object {
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, `name` TEXT, " +
-                        "PRIMARY KEY(`id`))")
-            }
-        }
-
-        val MIGRATION_2_3: Migration = object : Migration(2,3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE 'user' ADD COLUMN 'address' TEXT")
-            }
-        }
-
-
-        val MIGRATION_3_4: Migration = object : Migration(3,4) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE 'user' ADD COLUMN 'photo' TEXT /*DEFAULT '123' not null*/")
-            }
-        }
-
 
         @Volatile
         private var INSTANCE: DatabaseHandler? = null
@@ -52,7 +32,7 @@ abstract class DatabaseHandler : RoomDatabase() {
                     context.applicationContext,
                     DatabaseHandler::class.java,
                     "sampledatabase"
-                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3,MIGRATION_3_4)
+                )
                     .allowMainThreadQueries()
                     .build()
                 INSTANCE = instance

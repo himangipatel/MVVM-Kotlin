@@ -3,7 +3,7 @@ package com.structure.kotlin.ui
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.structure.kotlin.R
-import com.structure.kotlin.apiutills.ApiUtility
+import com.structure.kotlin.utills.ApiUtility
 import com.structure.kotlin.base.BaseViewModel
 import com.structure.kotlin.model.LoginUserData
 import com.structure.kotlin.network.RestApi
